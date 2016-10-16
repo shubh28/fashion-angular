@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Mad Street Fashion</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+	<script src="js/angular.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/index.js"></script>
+</head>
+<body ng-controller="mainController">
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">MAD STREET DEN - <small>Fashion is nothing without people!</small></a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      
+	      <ul class="nav navbar-nav navbar-right">
+	      	<div class="navbar-form navbar-left">
+	        	<div class="form-group">
+	          		<input type="text" class="form-control" ng-model="query" placeholder="Search">
+	        	</div>
+	      </div> 
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<div class="margin"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="of-left">
+					<h3 class="cate">Category</h3>
+				</div>
+				<div class="menu">
+					<label><input type="radio" name="category" ng-model="category" value=""> All</label><br>
+					<label><input type="radio" name="category" ng-model="category" value="apparel"> Apparel</label><br>
+					<label><input type="radio" name="category" ng-model="category" value="accessories"> Accessories</label>
+				</div>
+				<div class="of-left">
+					<h3 class="cate">Sort By</h3>
+				</div>
+				<div class="menu">
+					<label><input type="radio" name="filter" ng-model="sort" value="rating"> Rating</label><br>
+					<label><input type="radio" name="filter" ng-model="sort" value="price"> Price</label>
+				</div>
+				<div class="of-left">
+					<h3 class="cate">Price</h3>
+				</div>
+				<div class="menu">
+					<form class="form-inline" ng-submit="rangeFilter()">
+						<div class="form-group">
+							<input type="text" required class="form-control" ng-model="from" placeholder="from">
+						</div>
+						<div class="form-group">
+							<input type="text" required class="form-control" ng-model="to" placeholder="to">
+						</div>
+						<input type="submit" required class="form-control btn btn-warning">
+						<button ng-click="clear()" class="btn btn-warning">Clear</button>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-4 col-xs-6 pdt" ng-repeat="product in products | filter:search | filter:{tag:category} | orderBy:sort " > 
+						<a href="#">
+							<img src="{{product.image}}" class="img-responsive center-block">
+							<h5 class="name">{{product.name}}</h5>
+						</a>
+						<h3>{{product.price | currency}}</h3>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="category"><span class="glyphicon glyphicon-tag"></span> {{product.tag}}</div>		
+							</div>
+							<div class="col-md-6">
+								<div class="category"><strong>Quantity:</strong> {{product.quantity}} left</div>	
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="color" ng-style={background:'{{product.color}}'}><strong>Color</strong></div>
+							</div>
+							<div class="col-md-6">
+								<div class="category"><strong>Ratings:</strong> {{product.rating}}</div>
+							</div>
+						</div>
+						
+						<div class="description"><p>{{product.description}}</p></div>
+					</div>	
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</body>
+</html>

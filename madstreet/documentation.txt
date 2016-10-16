@@ -1,0 +1,1 @@
+This project has index.html file which serves as the starting point of the application. To run the project one just has to open index.html file in the browser. 
